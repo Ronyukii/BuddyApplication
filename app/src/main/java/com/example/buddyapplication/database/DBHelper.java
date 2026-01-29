@@ -146,7 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
     }
 
-    // 5. SEARCH (Requirement 3)
+    // 5. SEARCH
     public List<Buddy> searchBuddy(String keyword) {
         List<Buddy> buddyList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
