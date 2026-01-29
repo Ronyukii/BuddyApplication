@@ -5,5 +5,7 @@ public class User {
     private String username;
     private String password;
 
-    //contructors, getter, and setters, as you desire
+    public int getId() { return id; }
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
 }

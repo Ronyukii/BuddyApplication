@@ -1,8 +1,14 @@
 package com.example.buddyapplication.database;
 
 import android.content.Context;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.example.buddyapplication.model.Buddy;
+import com.example.buddyapplication.model.User;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BuddyApp.db";
@@ -18,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_PASSWORD = "password";
 
     // Column Names (Buddy)
-    public static final String COL_BUDDY_ID = "id";
+    public static final String COL_ID = "id";
     public static final String COL_NAME = "name";
     public static final String COL_GENDER = "gender";
     public static final String COL_DOB = "dob";
@@ -40,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Buddy Table
         String CREATE_BUDDY_TABLE = "CREATE TABLE " + TABLE_BUDDY + "("
-                + COL_BUDDY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_NAME + " TEXT,"
                 + COL_GENDER + " TEXT,"
                 + COL_DOB + " TEXT,"
@@ -60,12 +66,107 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // CRUDS OPERATIONS BELOW HERE
-    // What we need:
-    // 1. public boolean addUser(User user)
-    // 2. public boolean checkLogin(String user, String pass)
-    // 3. public boolean addBuddy(Buddy buddy)
-    // 4. public ArrayList<Buddy> getAllBuddies()
-    // 5. public void updateBuddy(Buddy buddy)
-    // 6. public void deleteBuddy(int id)
-    // 7. public ArrayList<Buddy> searchBuddy(String keyword)
+    // User Operations
+    public boolean registerUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_USERNAME, user.getUsername());
+        values.put(COL_PASSWORD, user.getPassword());
+
+        long result = db.insert(TABLE_USER, null, values);
+        return result != -1;
+    }
+
+    public boolean checkLogin(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USER + " WHERE "
+                + COL_USERNAME + "=? AND " + COL_PASSWORD + "=?", new String[]{username, password});
+
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+
+    // Buddy Operations
+    // 1. CREATE
+    public boolean addBuddy(Buddy buddy) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, buddy.getName());
+        values.put(COL_GENDER, buddy.getGender());
+        values.put(COL_DOB, buddy.getDob());
+        values.put(COL_PHONE, buddy.getPhone());
+        values.put(COL_EMAIL, buddy.getEmail());
+
+        long result = db.insert(TABLE_BUDDY, null, values);
+        return result != -1;
+    }
+
+    // 2. READ (All)
+    public List<Buddy> getAllBuddies() {
+        List<Buddy> buddyList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_BUDDY;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Buddy buddy = new Buddy();
+                buddy.setId(cursor.getInt(0));
+                buddy.setName(cursor.getString(1));
+                buddy.setGender(cursor.getString(2));
+                buddy.setDob(cursor.getString(3));
+                buddy.setPhone(cursor.getString(4));
+                buddy.setEmail(cursor.getString(5));
+                buddyList.add(buddy);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return buddyList;
+    }
+
+    // 3. UPDATE
+    public int updateBuddy(Buddy buddy) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, buddy.getName());
+        values.put(COL_GENDER, buddy.getGender());
+        values.put(COL_DOB, buddy.getDob());
+        values.put(COL_PHONE, buddy.getPhone());
+        values.put(COL_EMAIL, buddy.getEmail());
+
+        return db.update(TABLE_BUDDY, values, COL_ID + " = ?",
+                new String[]{String.valueOf(buddy.getId())});
+    }
+
+    // 4. DELETE
+    public void deleteBuddy(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BUDDY, COL_ID + " = ?",
+                new String[]{String.valueOf(id)});
+    }
+
+    // 5. SEARCH (Requirement 3)
+    public List<Buddy> searchBuddy(String keyword) {
+        List<Buddy> buddyList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Search by Name
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BUDDY + " WHERE " + COL_NAME + " LIKE ?",
+                new String[]{"%" + keyword + "%"});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Buddy buddy = new Buddy();
+                buddy.setId(cursor.getInt(0));
+                buddy.setName(cursor.getString(1));
+                buddy.setGender(cursor.getString(2));
+                buddy.setDob(cursor.getString(3));
+                buddy.setPhone(cursor.getString(4));
+                buddy.setEmail(cursor.getString(5));
+                buddyList.add(buddy);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return buddyList;
+    }
 }
