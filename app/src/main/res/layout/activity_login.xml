@@ -4,14 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Buddy App Login"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="@color/gray_900"
         android:layout_marginBottom="32dp"/>
 
     <EditText
@@ -19,7 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:textColor="@color/gray_900"
+        android:textColorHint="@color/gray_500"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"/>
 
     <EditText
         android:id="@+id/et_password"
@@ -27,14 +33,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:textColor="@color/gray_900"
+        android:textColorHint="@color/gray_500"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"/>
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:text="Login"/>
+        android:text="Login"
+        android:textColor="@color/gray_900"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@drawable/button_yellow_background"/>
 
     <!-- Optional: Register link if you want to be fancy -->
     <TextView
@@ -43,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="New User? Register Here"
-        android:textColor="@color/purple_500"/>
+        android:textColor="@color/yellow_primary"
+        android:textStyle="bold"/>
 
 </LinearLayout>
