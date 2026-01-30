@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,64 +14,88 @@
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name" />
+            android:hint="Full Name"
+            android:textColor="@color/gray_900"
+            android:textColorHint="@color/gray_500"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gender"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@color/gray_900"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
 
         <RadioGroup
             android:id="@+id/rg_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
             <RadioButton
                 android:id="@+id/rb_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male" />
+                android:text="Male"
+                android:textColor="@color/gray_900" />
 
             <RadioButton
                 android:id="@+id/rb_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female" />
+                android:text="Female"
+                android:textColor="@color/gray_900" />
         </RadioGroup>
 
         <EditText
             android:id="@+id/et_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:hint="Date of Birth (DD/MM/YYYY)"
             android:focusable="false"
-            android:clickable="true" />
+            android:clickable="true"
+            android:textColor="@color/gray_900"
+            android:textColorHint="@color/gray_500"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:hint="Phone No (e.g. 6012...)"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="@color/gray_900"
+            android:textColorHint="@color/gray_500"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:hint="Email Address"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/gray_900"
+            android:textColorHint="@color/gray_500"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="24dp"
-            android:text="Save Friend" />
+            android:text="Save Friend"
+            android:textColor="@color/gray_900"
+            android:textStyle="bold"
+            android:background="@drawable/button_yellow_background" />
 
     </LinearLayout>
 </ScrollView>
