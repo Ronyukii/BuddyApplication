@@ -1,8 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.BuddyApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.BuddyApplication" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary color (White) -->
+        <item name="colorPrimary">@color/white</item>
+        <!-- Secondary color (Yellow) -->
+        <item name="colorSecondary">@color/yellow_primary</item>
+        <!-- Tertiary color (Yellow shade) -->
+        <item name="colorTertiary">@color/yellow_600</item>
+
+        <!-- Background (White) -->
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorBackgroundFloating">@color/white</item>
+
+        <!-- Surface colors -->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorSurfaceVariant">@color/gray_100</item>
+
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/gray_900</item>
+        <item name="android:textColorSecondary">@color/gray_700</item>
+
+        <!-- Status bar styling -->
+        <item name="android:statusBarColor">@color/yellow_primary</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.BuddyApplication" parent="Base.Theme.BuddyApplication" />
