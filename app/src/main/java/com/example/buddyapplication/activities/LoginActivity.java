@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Registration failed (User might exist)", Toast.LENGTH_SHORT).show();
                 }
 
+                // I cant access the app ngl
                 // ALTERNATIVE: Go to Register Activity
                 // Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 // startActivity(intent);
