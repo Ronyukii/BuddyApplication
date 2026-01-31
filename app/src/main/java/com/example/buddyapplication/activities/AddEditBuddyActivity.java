@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.buddyapplication.R;
 import com.example.buddyapplication.database.DBHelper;
 import com.example.buddyapplication.model.Buddy;
+import com.example.buddyapplication.utils.SessionManager;
 
 import java.util.Calendar;
 
@@ -46,6 +48,8 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         rbMale = findViewById(R.id.rb_male);
         rbFemale = findViewById(R.id.rb_female);
         btnSave = findViewById(R.id.btn_save);
+
+        TextView tvHeaderTitle = findViewById(R.id.tv_header_title);
 
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
@@ -110,6 +114,8 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         String phone = etPhone.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String dob = etDob.getText().toString().trim();
+        SessionManager sessionManager = new SessionManager(this);
+        String currentUser = sessionManager.getUsername();
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Name and Phone are required", Toast.LENGTH_SHORT).show();
@@ -136,7 +142,7 @@ public class AddEditBuddyActivity extends AppCompatActivity {
             Toast.makeText(this, "Friend Updated!", Toast.LENGTH_SHORT).show();
         } else {
             Buddy newBuddy = new Buddy(name, gender, dob, phone, email);
-            dbHelper.addBuddy(newBuddy);
+            dbHelper.addBuddy(newBuddy, currentUser);
             Toast.makeText(this, "Friend Added!", Toast.LENGTH_SHORT).show();
         }
 

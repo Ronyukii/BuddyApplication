@@ -50,6 +50,9 @@ public class SessionManager {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         _context.startActivity(i);
     }
+    public String getUsername() {
+        return pref.getString(KEY_USERNAME, "");
+    }
 
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);

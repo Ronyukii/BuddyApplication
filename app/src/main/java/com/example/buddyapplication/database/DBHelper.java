@@ -12,8 +12,9 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BuddyApp.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
+    public static final String COL_OWNER = "owner_username";
     // Table Names
     public static final String TABLE_USER = "users";
     public static final String TABLE_BUDDY = "buddies";
@@ -51,7 +52,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COL_GENDER + " TEXT,"
                 + COL_DOB + " TEXT,"
                 + COL_PHONE + " TEXT,"
-                + COL_EMAIL + " TEXT" + ")";
+                + COL_EMAIL + " TEXT,"
+                + COL_OWNER + " TEXT" + ")";
         db.execSQL(CREATE_BUDDY_TABLE);
 
         //default admin user dummy
@@ -93,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Buddy Operations
     // 1. CREATE
-    public boolean addBuddy(Buddy buddy) {
+    public boolean addBuddy(Buddy buddy, String owner) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_NAME, buddy.getName());
@@ -101,17 +103,18 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_DOB, buddy.getDob());
         values.put(COL_PHONE, buddy.getPhone());
         values.put(COL_EMAIL, buddy.getEmail());
+        values.put(COL_OWNER, owner);
 
         long result = db.insert(TABLE_BUDDY, null, values);
         return result != -1;
     }
 
     // 2. READ (All)
-    public List<Buddy> getAllBuddies() {
+    public List<Buddy> getAllBuddies(String owner) {
         List<Buddy> buddyList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_BUDDY;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BUDDY + " WHERE " + COL_OWNER + "=?", new String[]{owner});
 
         if (cursor.moveToFirst()) {
             do {
@@ -151,12 +154,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // 5. SEARCH
-    public List<Buddy> searchBuddy(String keyword) {
+    public List<Buddy> searchBuddy(String keyword, String owner) {
         List<Buddy> buddyList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         // Search by Name
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BUDDY + " WHERE " + COL_NAME + " LIKE ?",
-                new String[]{"%" + keyword + "%"});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_BUDDY + " WHERE " + COL_NAME + " LIKE ? AND " + COL_OWNER + " = ?",
+                new String[]{"%" + keyword + "%", owner});
 
         if (cursor.moveToFirst()) {
             do {

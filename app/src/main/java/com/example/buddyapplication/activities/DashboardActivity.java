@@ -119,13 +119,15 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        buddyList = dbHelper.getAllBuddies();
+        String currentUser = sessionManager.getUsername(); // Get current user
+        buddyList = dbHelper.getAllBuddies(sessionManager.getUsername());   // Pass user to DB
         adapter = new BuddyAdapter(this, buddyList, dbHelper);
         recyclerView.setAdapter(adapter);
     }
 
     private void filter(String text) {
-        List<Buddy> filteredList = dbHelper.searchBuddy(text);
+        String currentUser = sessionManager.getUsername();
+        List<Buddy> filteredList = dbHelper.searchBuddy(text, sessionManager.getUsername()); // Pass user to DB
         adapter.updateList(filteredList);
     }
 

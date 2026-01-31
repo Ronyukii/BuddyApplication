@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.buddyapplication.R;
 import com.example.buddyapplication.database.DBHelper;
 import com.example.buddyapplication.model.Buddy;
+import com.example.buddyapplication.utils.SessionManager;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -28,12 +29,15 @@ public class ReportsActivity extends AppCompatActivity {
     private BarChart barChart;
     private DBHelper dbHelper;
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
 
         dbHelper = new DBHelper(this);
+        sessionManager = new SessionManager(this);
         pieChart = findViewById(R.id.chart_gender);
         barChart = findViewById(R.id.chart_birthday);
 
@@ -44,7 +48,7 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private void setupGenderChart() {
-        List<Buddy> buddyList = dbHelper.getAllBuddies();
+        List<Buddy> buddyList = dbHelper.getAllBuddies(sessionManager.getUsername());
         int maleCount = 0;
         int femaleCount = 0;
 
@@ -75,7 +79,7 @@ public class ReportsActivity extends AppCompatActivity {
     }
 
     private void setupBirthdayChart() {
-        List<Buddy> buddyList = dbHelper.getAllBuddies();
+        List<Buddy> buddyList = dbHelper.getAllBuddies(sessionManager.getUsername());
         int[] monthCounts = new int[12];
 
         for (Buddy b : buddyList) {

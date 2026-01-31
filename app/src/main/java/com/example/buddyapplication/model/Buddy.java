@@ -1,6 +1,8 @@
 package com.example.buddyapplication.model;
 
-public class Buddy {
+import java.io.Serializable;
+
+public class Buddy implements Serializable {
     private int id;
     private String name;
     private String gender;
