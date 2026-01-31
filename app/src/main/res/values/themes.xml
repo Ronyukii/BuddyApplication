@@ -26,5 +26,17 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="MyDatePickerStyle" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/purple_500</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/MyDatePickerButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/MyDatePickerButton</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="MyDatePickerButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+
     <style name="Theme.BuddyApplication" parent="Base.Theme.BuddyApplication" />
 </resources>

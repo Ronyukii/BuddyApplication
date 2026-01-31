@@ -13,6 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buddyapplication.R;
 import com.example.buddyapplication.adapter.BuddyAdapter;
@@ -28,6 +32,8 @@ public class DashboardActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton fabAdd;
     EditText etSearch;
+    ImageView btnProfileMenu;
+    TextView tvGreeting;
     BuddyAdapter adapter;
     List<Buddy> buddyList;
     DBHelper dbHelper;
@@ -38,6 +44,10 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin(); // Redirects if not logged in
 
@@ -45,6 +55,8 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_buddy_list);
         fabAdd = findViewById(R.id.fab_add);
         etSearch = findViewById(R.id.et_search);
+        btnProfileMenu = findViewById(R.id.btn_profile_menu);
+        tvGreeting = findViewById(R.id.tv_greeting);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         buddyList = new ArrayList<>();
@@ -66,6 +78,38 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
+
+        btnProfileMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProfileMenu(v);
+            }
+        });
+    }
+
+    private void showProfileMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.dashboard_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.action_logout) {
+                    sessionManager.logoutUser();
+                    finish();
+                    return true;
+                }
+                else if (id == R.id.action_report) {
+                    Intent intent = new Intent(DashboardActivity.this, ReportsActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        popup.show();
     }
 
     @Override

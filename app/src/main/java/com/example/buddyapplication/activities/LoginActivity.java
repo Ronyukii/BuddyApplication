@@ -76,20 +76,8 @@ public class LoginActivity extends AppCompatActivity {
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Quick method to add a user for testing purposes
-                User newUser = new User("student", "1234");
-                boolean success = dbHelper.registerUser(newUser); // Ensure you updated registerUser in DBHelper!
-
-                if (success) {
-                    Toast.makeText(LoginActivity.this, "User 'student' / '1234' registered!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Registration failed (User might exist)", Toast.LENGTH_SHORT).show();
-                }
-
-                // I cant access the app ngl
-                // ALTERNATIVE: Go to Register Activity
-                // Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }

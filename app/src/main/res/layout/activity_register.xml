@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="Welcome!"
+        android:text="Register!"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:textStyle="bold" />
@@ -27,8 +27,7 @@
         android:layout_centerInParent="true"
         android:layout_margin="24dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="#FFFFFF">
+        app:cardElevation="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,18 +38,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Create Account"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#333333"
                 android:layout_marginBottom="24dp"/>
 
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/et_reg_username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="Username"
+                android:hint="Choose Username"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:drawableStart="@android:drawable/ic_menu_myplaces"
@@ -59,7 +58,7 @@
                 android:layout_marginBottom="16dp"/>
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_reg_password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_field"
@@ -70,30 +69,41 @@
                 android:drawableStart="@android:drawable/ic_lock_lock"
                 android:drawablePadding="12dp"
                 android:drawableTint="#888888"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/et_reg_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:drawableStart="@android:drawable/ic_lock_lock"
+                android:drawablePadding="12dp"
+                android:drawableTint="#888888"
                 android:layout_marginBottom="24dp"/>
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_register_submit"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:text="LOGIN"
+                android:text="SIGN UP"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:backgroundTint="@color/purple_500"
-                app:cornerRadius="12dp"
-                android:elevation="4dp"/>
+                app:cornerRadius="12dp"/>
 
             <TextView
-                android:id="@+id/tv_register"
+                android:id="@+id/tv_back_to_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="New User? Create Account"
-                android:textColor="@color/blue_link"
-                android:textStyle="bold"/>
+                android:text="Back to Login"
+                android:textColor="@color/blue_link"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

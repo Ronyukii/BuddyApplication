@@ -47,6 +47,8 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         rbFemale = findViewById(R.id.rb_female);
         btnSave = findViewById(R.id.btn_save);
 
+        findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+
         etDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +80,7 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.MyDatePickerStyle,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

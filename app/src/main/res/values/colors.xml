@@ -5,7 +5,7 @@
     <color name="black">#FF000000</color>
 
     <!-- Yellow Theme Palette -->
-    <color name="yellow_primary">#FFD700</color>
+    <color name="yellow_primary">#edce05</color>
     <color name="yellow_600">#FFC700</color>
     <color name="yellow_500">#FFBB00</color>
     <color name="yellow_400">#FFAA00</color>
@@ -22,6 +22,8 @@
     <color name="gray_300">#E0E0E0</color>
     <color name="gray_200">#EEEEEE</color>
     <color name="gray_100">#F5F5F5</color>
+
+    <color name="blue_link">#0505ed</color>
 
     <!-- Status Colors -->
     <color name="btn_save">#4CAF50</color>

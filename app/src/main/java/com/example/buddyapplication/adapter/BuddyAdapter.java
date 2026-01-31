@@ -45,6 +45,12 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
         holder.tvName.setText(buddy.getName());
         holder.tvPhone.setText(buddy.getPhone());
 
+        if ("Female".equalsIgnoreCase(buddy.getGender())) {
+            holder.ivGender.setColorFilter(context.getResources().getColor(android.R.color.holo_red_light));
+        } else {
+            holder.ivGender.setColorFilter(context.getResources().getColor(android.R.color.holo_blue_light));
+        }
+
         holder.btnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(context, AddEditBuddyActivity.class);
             intent.putExtra("EXTRA_BUDDY", (Serializable) buddy);
@@ -87,6 +93,7 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvPhone;
         ImageView btnEdit, btnDelete;
+        ImageView ivGender;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +101,7 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
             tvPhone = itemView.findViewById(R.id.tv_phone);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnDelete = itemView.findViewById(R.id.btn_delete);
+            ivGender = itemView.findViewById(R.id.iv_gender_icon);
         }
     }
 }

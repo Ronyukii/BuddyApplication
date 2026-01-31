@@ -70,7 +70,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean registerUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COL_USERNAME, user.getUsername());
+
+        // Debugging: Print to Logcat to see if data is arriving here
+        System.out.println("DEBUG: Registering " + user.getUsername());
+
+        values.put(COL_USERNAME, user.getUsername()); // <--- Must use .getUsername()
         values.put(COL_PASSWORD, user.getPassword());
 
         long result = db.insert(TABLE_USER, null, values);
