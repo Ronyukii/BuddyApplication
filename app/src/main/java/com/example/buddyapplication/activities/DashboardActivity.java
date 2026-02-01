@@ -11,12 +11,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.buddyapplication.R;
 import com.example.buddyapplication.adapter.BuddyAdapter;
@@ -32,7 +29,8 @@ public class DashboardActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton fabAdd;
     EditText etSearch;
-    ImageView btnProfileMenu;
+    ImageView btnViewReports;
+    ImageView btnLogout;
     TextView tvGreeting;
     BuddyAdapter adapter;
     List<Buddy> buddyList;
@@ -55,7 +53,8 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_buddy_list);
         fabAdd = findViewById(R.id.fab_add);
         etSearch = findViewById(R.id.et_search);
-        btnProfileMenu = findViewById(R.id.btn_profile_menu);
+        btnViewReports = findViewById(R.id.btn_view_reports);
+        btnLogout = findViewById(R.id.btn_logout);
         tvGreeting = findViewById(R.id.tv_greeting);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,6 +63,21 @@ public class DashboardActivity extends AppCompatActivity {
         fabAdd.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, AddEditBuddyActivity.class);
             startActivity(intent);
+        });
+
+        // View Reports button
+        btnViewReports.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, ReportsActivity.class);
+            startActivity(intent);
+        });
+
+        // Logout button
+        btnLogout.setOnClickListener(v -> {
+            sessionManager.logoutUser();
+            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -78,38 +92,6 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-
-        btnProfileMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showProfileMenu(v);
-            }
-        });
-    }
-
-    private void showProfileMenu(View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.getMenuInflater().inflate(R.menu.dashboard_menu, popup.getMenu());
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-
-                if (id == R.id.action_logout) {
-                    sessionManager.logoutUser();
-                    finish();
-                    return true;
-                }
-                else if (id == R.id.action_report) {
-                    Intent intent = new Intent(DashboardActivity.this, ReportsActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return true;
-            }
-        });
-
-        popup.show();
     }
 
     @Override
@@ -119,15 +101,13 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        String currentUser = sessionManager.getUsername(); // Get current user
-        buddyList = dbHelper.getAllBuddies(sessionManager.getUsername());   // Pass user to DB
+        buddyList = dbHelper.getAllBuddies(sessionManager.getUsername());
         adapter = new BuddyAdapter(this, buddyList, dbHelper);
         recyclerView.setAdapter(adapter);
     }
 
     private void filter(String text) {
-        String currentUser = sessionManager.getUsername();
-        List<Buddy> filteredList = dbHelper.searchBuddy(text, sessionManager.getUsername()); // Pass user to DB
+        List<Buddy> filteredList = dbHelper.searchBuddy(text, sessionManager.getUsername());
         adapter.updateList(filteredList);
     }
 

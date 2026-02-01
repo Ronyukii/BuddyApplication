@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "BuddyApp.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String COL_OWNER = "owner_username";
     // Table Names
@@ -31,6 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_DOB = "dob";
     public static final String COL_PHONE = "phone";
     public static final String COL_EMAIL = "email";
+    public static final String COL_IMAGE_PATH = "image_path";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,6 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COL_DOB + " TEXT,"
                 + COL_PHONE + " TEXT,"
                 + COL_EMAIL + " TEXT,"
+                + COL_IMAGE_PATH + " TEXT,"
                 + COL_OWNER + " TEXT" + ")";
         db.execSQL(CREATE_BUDDY_TABLE);
 
@@ -103,6 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_DOB, buddy.getDob());
         values.put(COL_PHONE, buddy.getPhone());
         values.put(COL_EMAIL, buddy.getEmail());
+        values.put(COL_IMAGE_PATH, buddy.getImagePath());
         values.put(COL_OWNER, owner);
 
         long result = db.insert(TABLE_BUDDY, null, values);
@@ -125,6 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 buddy.setDob(cursor.getString(3));
                 buddy.setPhone(cursor.getString(4));
                 buddy.setEmail(cursor.getString(5));
+                buddy.setImagePath(cursor.getString(6));
                 buddyList.add(buddy);
             } while (cursor.moveToNext());
         }
@@ -141,6 +145,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_DOB, buddy.getDob());
         values.put(COL_PHONE, buddy.getPhone());
         values.put(COL_EMAIL, buddy.getEmail());
+        values.put(COL_IMAGE_PATH, buddy.getImagePath());
 
         return db.update(TABLE_BUDDY, values, COL_ID + " = ?",
                 new String[]{String.valueOf(buddy.getId())});
@@ -170,6 +175,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 buddy.setDob(cursor.getString(3));
                 buddy.setPhone(cursor.getString(4));
                 buddy.setEmail(cursor.getString(5));
+                buddy.setImagePath(cursor.getString(6));
                 buddyList.add(buddy);
             } while (cursor.moveToNext());
         }
