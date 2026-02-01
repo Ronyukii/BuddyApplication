@@ -9,6 +9,7 @@ public class Buddy implements Serializable {
     private String dob; //date of birth
     private String phone;
     private String email;
+    private String imagePath; // Path to buddy's profile image
 
     public Buddy() {}
 
@@ -19,6 +20,7 @@ public class Buddy implements Serializable {
         this.dob = dob;
         this.phone = phone;
         this.email = email;
+        this.imagePath = null;
     }
 
     public Buddy(String name, String gender, String dob, String phone, String email) {
@@ -27,6 +29,7 @@ public class Buddy implements Serializable {
         this.dob = dob;
         this.phone = phone;
         this.email = email;
+        this.imagePath = null;
     }
 
     public int getId() { return id; }
@@ -46,4 +49,7 @@ public class Buddy implements Serializable {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getImagePath() { return imagePath; }
+    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
 }

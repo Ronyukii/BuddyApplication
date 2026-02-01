@@ -45,10 +45,20 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
         holder.tvName.setText(buddy.getName());
         holder.tvPhone.setText(buddy.getPhone());
 
-        if ("Female".equalsIgnoreCase(buddy.getGender())) {
-            holder.ivGender.setColorFilter(context.getResources().getColor(android.R.color.holo_red_light));
+        // Set first letter of name as avatar
+        String name = buddy.getName();
+        if (name != null && !name.trim().isEmpty()) {
+            String firstLetter = name.trim().substring(0, 1).toUpperCase();
+            holder.tvAvatarLetter.setText(firstLetter);
         } else {
-            holder.ivGender.setColorFilter(context.getResources().getColor(android.R.color.holo_blue_light));
+            holder.tvAvatarLetter.setText("?");
+        }
+
+        // Set background color based on gender
+        if ("Female".equalsIgnoreCase(buddy.getGender())) {
+            holder.tvAvatarLetter.setBackgroundResource(R.drawable.bg_avatar_female);
+        } else {
+            holder.tvAvatarLetter.setBackgroundResource(R.drawable.bg_avatar_male);
         }
 
         holder.btnEdit.setOnClickListener(v -> {
@@ -80,6 +90,7 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
         });
     }
 
+
     @Override
     public int getItemCount() {
         return buddyList.size();
@@ -93,7 +104,7 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvPhone;
         ImageView btnEdit, btnDelete;
-        ImageView ivGender;
+        TextView tvAvatarLetter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,7 +112,7 @@ public class BuddyAdapter extends RecyclerView.Adapter<BuddyAdapter.ViewHolder> 
             tvPhone = itemView.findViewById(R.id.tv_phone);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnDelete = itemView.findViewById(R.id.btn_delete);
-            ivGender = itemView.findViewById(R.id.iv_gender_icon);
+            tvAvatarLetter = itemView.findViewById(R.id.tv_avatar_letter);
         }
     }
 }
