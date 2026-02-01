@@ -28,6 +28,7 @@ public class AddEditBuddyActivity extends AppCompatActivity {
     private RadioGroup rgGender;
     private RadioButton rbMale, rbFemale;
     private Button btnSave;
+    private TextView tvAvatarLetter;
 
     private DBHelper dbHelper;
     private Buddy buddyToEdit;
@@ -48,10 +49,25 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         rbMale = findViewById(R.id.rb_male);
         rbFemale = findViewById(R.id.rb_female);
         btnSave = findViewById(R.id.btn_save);
+        tvAvatarLetter = findViewById(R.id.tv_avatar_letter);
 
         TextView tvHeaderTitle = findViewById(R.id.tv_header_title);
 
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+
+        // Update avatar letter as user types name
+        etName.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                updateAvatarLetter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
 
         etDob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +122,9 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         } else if (buddy.getGender() != null && buddy.getGender().equalsIgnoreCase("Female")) {
             rbFemale.setChecked(true);
         }
+
+        // Update avatar with first letter of name
+        updateAvatarLetter(buddy.getName());
     }
 
     private void saveBuddy() {
@@ -147,5 +166,14 @@ public class AddEditBuddyActivity extends AppCompatActivity {
         }
 
         finish();
+    }
+
+    private void updateAvatarLetter(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            String firstLetter = name.trim().substring(0, 1).toUpperCase();
+            tvAvatarLetter.setText(firstLetter);
+        } else {
+            tvAvatarLetter.setText("?");
+        }
     }
 }
