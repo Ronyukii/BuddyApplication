@@ -20,6 +20,9 @@
         <item name="android:textColorPrimary">@color/gray_900</item>
         <item name="android:textColorSecondary">@color/gray_700</item>
 
+        <!-- Font family (Montserrat-like) -->
+        <item name="android:fontFamily">sans-serif-medium</item>
+
         <!-- Status bar styling -->
         <item name="android:statusBarColor">@color/yellow_primary</item>
         <item name="android:navigationBarColor">@color/white</item>

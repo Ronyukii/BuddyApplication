@@ -25,14 +25,16 @@
             app:cardBackgroundColor="#F0F0F0"
             android:layout_centerVertical="true">
 
-            <ImageView
-                android:id="@+id/iv_gender_icon"
+            <TextView
+                android:id="@+id/tv_avatar_letter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside"
-                android:src="@android:drawable/ic_menu_myplaces"
-                app:tint="#555555"
-                android:padding="10dp"/>
+                android:gravity="center"
+                android:text="B"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="@color/purple_500"/>
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
