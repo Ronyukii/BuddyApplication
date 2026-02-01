@@ -7,19 +7,11 @@
     android:background="#FFFFFF">
 
     <View
+        android:id="@+id/view_header"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/bg_dashboard_header"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="Welcome!"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -51,11 +43,13 @@
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_field"
                 android:hint="Username"
+                android:textColorHint="#999999"
+                android:textColor="#333333"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:drawableStart="@android:drawable/ic_menu_myplaces"
                 android:drawablePadding="12dp"
-                android:drawableTint="#888888"
+                android:drawableTint="#666666"
                 android:layout_marginBottom="16dp"/>
 
             <EditText
@@ -64,12 +58,14 @@
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_field"
                 android:hint="Password"
+                android:textColorHint="#999999"
+                android:textColor="#333333"
                 android:inputType="textPassword"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:drawableStart="@android:drawable/ic_lock_lock"
                 android:drawablePadding="12dp"
-                android:drawableTint="#888888"
+                android:drawableTint="#666666"
                 android:layout_marginBottom="24dp"/>
 
             <Button
