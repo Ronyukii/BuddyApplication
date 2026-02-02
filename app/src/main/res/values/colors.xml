@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <!-- Primary Colors -->
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- Yellow Theme Palette -->
+    <color name="yellow_primary">#edce05</color>
+    <color name="yellow_600">#FFC700</color>
+    <color name="yellow_500">#FFBB00</color>
+    <color name="yellow_400">#FFAA00</color>
+    <color name="yellow_light">#FFEB3B</color>
+    <color name="yellow_pale">#FFFDE7</color>
+
+    <!-- Neutral Colors -->
+    <color name="gray_900">#212121</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_100">#F5F5F5</color>
+
+    <color name="blue_link">#0505ed</color>
+
+    <!-- Status Colors -->
+    <color name="btn_save">#4CAF50</color>
+    <color name="btn_delete">#F44336</color>
+
+    <!-- Deprecated - kept for backward compatibility -->
+    <color name="purple_500">#FFD700</color>
+    <color name="teal_200">#FFD700</color>
 </resources>

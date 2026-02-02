@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Font family configuration for Montserrat -->
+<!-- To use actual Montserrat fonts: -->
+<!-- 1. Download Montserrat font files (.ttf) from Google Fonts -->
+<!-- 2. Place them in this folder with names like: montserrat_regular.ttf, montserrat_bold.ttf -->
+<!-- 3. Update the font references below to point to those files -->
+<!-- For now, this file serves as a placeholder to enable font customization -->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+</font-family>
+
